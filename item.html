@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Inventory Item</title>
+</head>
+
+<body>
+
+<h2>Item Information</h2>
+<div id="output"></div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+fetch("items.json")
+.then(response => response.json())
+.then(data => {
+
+const item = data.find(x => x.property_no === id);
+
+if(item){
+document.getElementById("output").innerHTML = `
+Property Number: ${item.property_no}<br>
+Item: ${item.item}<br>
+Brand: ${item.brand}<br>
+Specs: ${item.specs}<br>
+Building: ${item.building}<br>
+Room: ${item.room}<br>
+Assigned To: ${item.assigned_to}
+`;
+}
+else{
+document.getElementById("output").innerHTML = "Item not found";
+}
+
+});
+
+</script>
+
+</body>
+</html>
