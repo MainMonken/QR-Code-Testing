@@ -1,16 +1,18 @@
-[
-  {
-    "PROPERTY NO": "02-E-3013",
-    "ARTICLE & DESCRIPTION": "ACER VERSION X4620G",
-    "LOCATION": "COLLECTING",
-    "ACCOUNTABLE OFFICER": "MR/MS",
-    "DATE ACQUIRED / AMOUNT": "22222"
-  },
-  {
-    "PROPERTY NO": "04-G-2068",
-    "ARTICLE & DESCRIPTION": "ACER VERSION X3602S",
-    "LOCATION": "CLACLC",
-    "ACCOUNTABLE OFFICER": "MR/MS",
-    "DATE ACQUIRED / AMOUNT": "30202"
-  }
-]
+{
+  "items": [
+    {
+      "PROPERTY NO": "PROP-0001",
+      "ARTICLE & DESCRIPTION": "Desktop Computer - Dell OptiPlex i7 / 16GB RAM / 512GB SSD",
+      "LOCATION": "Building A - Room 204",
+      "ACCOUNTABLE OFFICER": "Maria Santos",
+      "DATE ACQUIRED / AMOUNT": "Jan 2024 / ₱45,000"
+    },
+    {
+      "PROPERTY NO": "PROP-0002",
+      "ARTICLE & DESCRIPTION": "Monitor - LG 24 inch IPS",
+      "LOCATION": "Building A - Room 204",
+      "ACCOUNTABLE OFFICER": "Maria Santos",
+      "DATE ACQUIRED / AMOUNT": "Jan 2024 / ₱8,500"
+    }
+  ]
+}
