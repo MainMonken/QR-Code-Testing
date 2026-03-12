@@ -6,10 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+
 body{
     font-family: Arial;
     padding:20px;
-    background:#f5f5f5;
+    background:#f4f4f4;
 }
 
 .card{
@@ -18,10 +19,6 @@ body{
     border-radius:10px;
     max-width:500px;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-h2{
-    margin-bottom:20px;
 }
 
 .label{
@@ -37,7 +34,7 @@ h2{
 <h2>Property Details</h2>
 
 <div id="item" class="card">
-Loading property information...
+Loading property data...
 </div>
 
 <script>
@@ -45,7 +42,7 @@ Loading property information...
 const params = new URLSearchParams(window.location.search);
 const propertyID = params.get("id");
 
-fetch("inventory.json")
+fetch("items.json")
 .then(response => response.json())
 .then(data => {
 
