@@ -1,39 +1,80 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Inventory Item</title>
+<title>Property Information</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+    font-family: Arial;
+    padding:20px;
+    background:#f5f5f5;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    max-width:500px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+.label{
+    font-weight:bold;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h2>Item Information</h2>
-<div id="output"></div>
+<h2>Property Details</h2>
+
+<div id="item" class="card">
+Loading property information...
+</div>
 
 <script>
 
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const propertyID = params.get("id");
 
-fetch("items.json")
+fetch("inventory.json")
 .then(response => response.json())
 .then(data => {
 
-const item = data.find(x => x.property_no === id);
+    const item = data.items.find(x => x["PROPERTY NO"] === propertyID);
 
-if(item){
-document.getElementById("output").innerHTML = `
-Property Number: ${item.property_no}<br>
-Item: ${item.item}<br>
-Brand: ${item.brand}<br>
-Specs: ${item.specs}<br>
-Building: ${item.building}<br>
-Room: ${item.room}<br>
-Assigned To: ${item.assigned_to}
-`;
-}
-else{
-document.getElementById("output").innerHTML = "Item not found";
-}
+    if(item){
+
+        document.getElementById("item").innerHTML = `
+
+        <p><span class="label">PROPERTY NO:</span> ${item["PROPERTY NO"]}</p>
+
+        <p><span class="label">ARTICLE & DESCRIPTION:</span><br>
+        ${item["ARTICLE & DESCRIPTION"]}</p>
+
+        <p><span class="label">LOCATION:</span> ${item["LOCATION"]}</p>
+
+        <p><span class="label">ACCOUNTABLE OFFICER:</span>
+        ${item["ACCOUNTABLE OFFICER"]}</p>
+
+        <p><span class="label">DATE ACQUIRED / AMOUNT:</span>
+        ${item["DATE ACQUIRED / AMOUNT"]}</p>
+
+        `;
+
+    } else {
+
+        document.getElementById("item").innerHTML = "Property record not found.";
+
+    }
 
 });
 
