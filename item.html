@@ -2,23 +2,30 @@
 <html>
 
 <head>
-<title>Property Information</title>
+
+<meta charset="UTF-8">
+<title>Property Details</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
 body{
-    font-family: Arial;
-    padding:20px;
+    font-family: Arial, sans-serif;
     background:#f4f4f4;
+    padding:30px;
 }
 
-.card{
+.container{
     background:white;
-    padding:20px;
-    border-radius:10px;
+    padding:25px;
     max-width:500px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    margin:auto;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
 }
 
 .label{
@@ -31,10 +38,14 @@ body{
 
 <body>
 
+<div class="container">
+
 <h2>Property Details</h2>
 
-<div id="item" class="card">
+<div id="item">
 Loading property data...
+</div>
+
 </div>
 
 <script>
@@ -43,10 +54,14 @@ const params = new URLSearchParams(window.location.search);
 const propertyID = params.get("id");
 
 fetch("items.json")
-.then(response => response.json())
-.then(data => {
+.then(function(response){
+    return response.json();
+})
+.then(function(data){
 
-    const item = data.find(x => x["PROPERTY NO"] === propertyID);
+    const item = data.find(function(record){
+        return record["PROPERTY NO"] === propertyID;
+    });
 
     if(item){
 
@@ -57,7 +72,8 @@ fetch("items.json")
         <p><span class="label">ARTICLE & DESCRIPTION:</span><br>
         ${item["ARTICLE & DESCRIPTION"]}</p>
 
-        <p><span class="label">LOCATION:</span> ${item["LOCATION"]}</p>
+        <p><span class="label">LOCATION:</span>
+        ${item["LOCATION"]}</p>
 
         <p><span class="label">ACCOUNTABLE OFFICER:</span>
         ${item["ACCOUNTABLE OFFICER"]}</p>
@@ -69,9 +85,16 @@ fetch("items.json")
 
     } else {
 
-        document.getElementById("item").innerHTML = "Property record not found.";
+        document.getElementById("item").innerHTML =
+        "Property record not found.";
 
     }
+
+})
+.catch(function(error){
+
+    document.getElementById("item").innerHTML =
+    "Error loading property data.";
 
 });
 
@@ -79,4 +102,3 @@ fetch("items.json")
 
 </body>
 </html>
-
