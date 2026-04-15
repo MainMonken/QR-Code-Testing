@@ -7,9 +7,6 @@
 <title>Property Details</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- QR Code Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 <style>
 
 body{
@@ -78,7 +75,7 @@ fetch("items.json")
 
     if(item){
 
-        // Display data
+        // Display property details
         document.getElementById("item").innerHTML = `
 
         <p><span class="label">PROPERTY NO:</span> ${item["PROPERTY NO"]}</p>
@@ -97,14 +94,13 @@ fetch("items.json")
 
         `;
 
-        // Generate QR Code (current page URL)
+        // Generate QR Code using API (reliable)
         const currentURL = window.location.href;
 
-        new QRCode(document.getElementById("qrcode"), {
-            text: currentURL,
-            width: 150,
-            height: 150
-        });
+        document.getElementById("qrcode").innerHTML = `
+            <p><b>QR Code:</b></p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentURL)}" alt="QR Code">
+        `;
 
     } else {
 
