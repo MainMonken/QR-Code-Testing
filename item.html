@@ -7,6 +7,9 @@
 <title>Property Details</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- QR Code Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <style>
 
 body{
@@ -32,6 +35,11 @@ h2{
     font-weight:bold;
 }
 
+#qrcode{
+    margin-top:20px;
+    text-align:center;
+}
+
 </style>
 
 </head>
@@ -46,25 +54,31 @@ h2{
 Loading property data...
 </div>
 
+<div id="qrcode"></div>
+
 </div>
 
 <script>
 
+// Get PROPERTY NO from URL
 const params = new URLSearchParams(window.location.search);
 const propertyID = params.get("id");
 
+// Load JSON
 fetch("items.json")
 .then(function(response){
     return response.json();
 })
 .then(function(data){
 
+    // Find matching item
     const item = data.find(function(record){
         return record["PROPERTY NO"] === propertyID;
     });
 
     if(item){
 
+        // Display data
         document.getElementById("item").innerHTML = `
 
         <p><span class="label">PROPERTY NO:</span> ${item["PROPERTY NO"]}</p>
@@ -82,6 +96,15 @@ fetch("items.json")
         ${item["DATE ACQUIRED / AMOUNT"]}</p>
 
         `;
+
+        // Generate QR Code (current page URL)
+        const currentURL = window.location.href;
+
+        new QRCode(document.getElementById("qrcode"), {
+            text: currentURL,
+            width: 150,
+            height: 150
+        });
 
     } else {
 
